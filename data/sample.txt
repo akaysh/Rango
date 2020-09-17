@@ -1,0 +1,10 @@
+True well done
+True good work
+True great effort
+True nice work
+True excellent
+False weak
+False poor effort
+False not good
+False poor work
+False could have done better

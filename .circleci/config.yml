@@ -1,0 +1,28 @@
+# .circleci/config.yml
+version: 2
+jobs:
+  build:
+    working_directory: ~/Rango   # Clone into a directory whose name matches your Package.
+    docker:
+      - image: akaysh/julia-nlp:latest
+    environment:
+      DATADEPS_ALWAYS_ACCEPT: true             # image comes from Docker hub
+    steps:
+      - checkout
+      - run:
+          name: Install the dependencies
+          command: julia src/dependencies.jl
+      - run:
+          name: Build the code
+          command: julia src/ModelPreTrained.jl
+      - run:
+          name: Check the Sanity
+          command: julia Test/TestModels.jl
+      # - codecov/upload:
+      #     file: "coverage-lcov.info"
+      #     token: "..."
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
